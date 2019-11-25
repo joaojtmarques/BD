@@ -1,0 +1,10 @@
+Declare @Id int
+Set @Id = 1
+
+While @Id <= 12000
+Begin 
+   Insert Into tblAuthors values ('Author - ' + CAST(@Id as nvarchar(10)),
+              'Country - ' + CAST(@Id as nvarchar(10)) + ' name')
+   Print @Id
+   Set @Id = @Id + 1
+End
