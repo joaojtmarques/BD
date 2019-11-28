@@ -10,6 +10,7 @@ drop table anomalia cascade;
 drop table item cascade;
 drop table local_publico cascade;
 
+
 create table local_publico (
     latitude float not null,
     longitude float not null,
@@ -34,8 +35,8 @@ create table anomalia (
     imagem char(10) not null, /*verificar isto*/
     lingua char(12) not null,
     ts timestamp not null,
-    descricao char(25),
-    tem_anomalia_redacao boolean,
+    descricao text not null,
+    tem_anomalia_redacao boolean not null,
     primary key (id)
 );
 
