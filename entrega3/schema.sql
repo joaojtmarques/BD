@@ -34,8 +34,8 @@ create table anomalia (
     imagem char(10) not null, /*verificar isto*/
     lingua char(12) not null,
     ts timestamp not null,
-    descricao text not null,
-    tem_anomalia_redacao boolean not null,
+    descricao char(25),
+    tem_anomalia_redacao boolean,
     primary key (id)
 );
 

@@ -11,13 +11,12 @@
 
     $zona = $_REQUEST['zona'];
     $imagem = $_REQUEST['imagem'];
-    $lingua = $_REQUEST['lingua'];
-    $ts = $_REQUEST['ts'];
+		$lingua = $_REQUEST['lingua'];
+		$ts = $_REQUEST['ts'];
     $descricao = $_REQUEST['descricao'];
     $tem_anomalia_redacao = $_REQUEST['tem_anomalia_redacao'];
 
-
-	;
+		$caught = false;
 
 
 	try
@@ -32,12 +31,12 @@
 
 
 
-		$sql= "INSERT INTO anomalia (zona, imagem, lingua, ts, descricao, tem_anomalia_redacao) VALUES (:zona, :imagem, :lingua, CURRENT_TIMESTAMP, :descricao, :tem_anomalia_redacao);";
+		$sql= "INSERT INTO anomalia (zona, imagem, lingua, ts, descricao, tem_anomalia_redacao) VALUES (:zona, :imagem, :lingua, :ts, :descricao, :tem_anomalia_redacao);";
 		$db->beginTransaction();
 
 		$result=$db->prepare($sql);
 
-		$result-> execute(array($zona, $imagem, $lingua, $ts, $descrição, $tem_anomalia_redação));
+		$result-> execute(array($zona, $imagem, $lingua, $ts, $descricao, $tem_anomalia_redacao));
 
 	 	$db->commit();
 		$db=null;
