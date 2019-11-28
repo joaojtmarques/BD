@@ -35,13 +35,15 @@ inner join anomalia on anomalia.id = incidencia.anomalia_id)
 where extract(year from ts) = 2019 and latitude > 39.336775;
 
 
-4. wtf
+4.
 
-select * from utilizador_qualificado natural join utilizador natural join incidencia left join correcao on incidencia.anomalia_id = correcao.anomalia_id where correcao.anomalia_id is NULL;
-
-select email from utilizador_qualificado natural join utilizador natural join incidencia inner join item on incidencia.item_id = item.id inner join anomalia on incidencia.anomalia_id = anomalia.id where extract(year from ts) = '2018' and latitude < 39.336775;
-
-
-select utilizador.email from (utilizador_qualificado natural join utilizador natural join incidencia left join correcao on (incidencia.anomalia_id = correcao.anomalia_id and incidencia.email = correcao.email)inner join item on incidencia.item_id = item.id inner join anomalia on incidencia.anomalia_id = anomalia.id) where extract(year from ts) = '2018' and latitude < 39.336775 and correcao.anomalia_id is NULL;
-
-select utilizador.email from (utilizador_qualificado natural join utilizador natural join incidencia left join correcao on (incidencia.anomalia_id = correcao.anomalia_id and incidencia.email = correcao.email)inner join item on incidencia.item_id = item.id inner join anomalia on incidencia.anomalia_id = anomalia.id) where extract(year from ts) = '2018' and latitude < 39.336775 and correcao.anomalia_id is NULL;
+select email from 
+(select utilizador_qualificado.email from 
+(select email from (select count(email) as countp, counti, email  from 
+(select * from (select * from (select count(email) as countI, email from incidencia 
+natural join utilizador_qualificado group by email) as TempTable natural join incidencia) as TempTable2 
+natural join correcao where TempTable2.email = correcao.email and TempTable2.anomalia_id = correcao.anomalia_id) as TempTable3 
+group by email, counti) as TempTable4 where counti = countp) as TempTable5 
+inner join utilizador_qualificado on TempTable5.email <> utilizador_qualificado.email) as TempTable6 
+natural join incidencia inner join item on incidencia.item_id = item.id 
+inner join anomalia on anomalia.id = anomalia_id where extract(year from ts) = '2018' and latitude < 39.336775 group by email;
