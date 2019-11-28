@@ -43,8 +43,8 @@ for i in range(30):
 
 for i in range(30):
     u = random.choice(utilizadores_qualificados)
-    print("Insert Into proposta_de_correcao values ('email" + str(u) + "@bd.com', " + str(i) + ", " +  ts[random.randrange(0,36,1)] + ", 'texto" + str(i) + "');\n")
-    print("Insert Into correcao values ('email" + str(u) + "@bd.com', " + str(i) + ", " + str(random.randrange(0,30,1)) + ");\n")
+    print("Insert Into proposta_de_correcao(email, data_hora, texto) values ('email" + str(u) + "@bd.com', " +  ts[random.randrange(0,36,1)] + ", 'texto" + str(i) + "');\n")
+    print("Insert Into correcao(email, anomalia_id) values ('email" + str(u) + "@bd.com', " + str(random.randrange(1,31,1)) + ");\n")
 
 
 
