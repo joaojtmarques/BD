@@ -11,12 +11,15 @@
 
     $zona = $_REQUEST['zona'];
     $imagem = $_REQUEST['imagem'];
-		$lingua = $_REQUEST['lingua'];
-		$ts = $_REQUEST['ts'];
+	$lingua = $_REQUEST['lingua'];
+	$ts = $_REQUEST['ts'];
     $descricao = $_REQUEST['descricao'];
-    $tem_anomalia_redacao = $_REQUEST['tem_anomalia_redacao'];
+	$tem_anomalia_redacao = $_REQUEST['tem_anomalia_redacao'];
+	$zona2 = $_REQUEST['zona2'];
+	$lingua2 = $_REQUEST['lingua2'];
 
-		$caught = false;
+
+	$caught = false;
 
 
 	try
@@ -32,22 +35,32 @@
 
 
 		$sql= "INSERT INTO anomalia (zona, imagem, lingua, ts, descricao, tem_anomalia_redacao) VALUES (:zona, :imagem, :lingua, :ts, :descricao, :tem_anomalia_redacao);";
+		
 		$db->beginTransaction();
 
 		$result=$db->prepare($sql);
 
 		$result-> execute(array($zona, $imagem, $lingua, $ts, $descricao, $tem_anomalia_redacao));
 
-	 	$db->commit();
+		if( strtolower($tem_anomalia_redacao) == "false") {
+			$sql2= "INSERT INTO anomalia_traducao (zona2, lingua2) VALUES (:zona2, :lingua2);";
+			$result2=$db->prepare($sql2);
+			$result2-> execute(array($zona2, $lingua2));
+		}
+
+		$db->commit();
 		$db=null;
+		 
 	}
 	catch(PDOException $e){
 		$caught = true;
 		echo("<p> Anomalia nao inserida :( </p>");
 		echo("<p>ERROR: {$e->getMessage()}</p>");
 	}
-
-	if (!$caught) echo("<p> Anomalia inserida com sucesso :) </p>");
+	
+	if (!$caught) {
+		echo("<p> Anomalia inserida com sucesso :) </p>");
+	}
 
 ?>
 

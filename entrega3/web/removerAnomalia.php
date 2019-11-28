@@ -31,7 +31,7 @@
 		$result=$db->prepare($sql);
 
 		$result-> execute(array($id));
-		
+		$numRows = $result->rowcount();
 		
 		$db->commit();
 
@@ -42,7 +42,9 @@
         echo("<p> Anomalia não removida :(</p>");
 		echo("<p>ERROR: {$e->getMessage()}</p>");
     }
-    if (!$caught) echo("<p> Anomalia removida com sucesso :)</p>");
+    if($numRows === 0) echo("A Anomalia que esta a tentar remover nao existe");
+  	elseif (!$caught) echo("<p> Anomalia removida com sucesso :)</p>");
+
 
 
 ?>

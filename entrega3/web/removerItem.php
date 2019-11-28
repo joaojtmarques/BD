@@ -33,7 +33,7 @@
 		$result=$db->prepare($sql);
 
 		$result-> execute(array($id));
-		
+		$numRows = $result->rowcount();
 		
 		$db->commit();
 
@@ -44,7 +44,9 @@
         echo("<p> Item não removido :(</p>");
 		echo("<p>ERROR: {$e->getMessage()}</p>");
     }
-    if (!$caught) echo("<p> Item removido com sucesso :)</p>");
+    if($numRows === 0) echo("O item que esta a tentar remover nao existe");
+  elseif (!$caught) echo("<p> item removido com sucesso :)</p>");
+
 
 ?>
 

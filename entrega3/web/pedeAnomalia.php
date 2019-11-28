@@ -14,6 +14,11 @@
         <p><input type="visible" name="descricao" value="<?=$_REQUEST['descricao']?>"/></p>
         <p>tem_anomalia_redacao (True, False):</p>
         <p><input type="visible" name="tem_anomalia_redacao" value="<?=$_REQUEST['tem_anomalia_redacao']?>"/></p>
+        <p>Se colocou false na opcao anterior, preencha os proximos espacos:</p>
+        <p>Zona2:</p>
+        <p><input type="visible" name="zona2" value="<?=$_REQUEST['zona2']?>"/></p>
+        <p>Lingua2:</p>
+        <p><input type="visible" name="lingua2" value="<?=$_REQUEST['lingua2']?>"/></p>
         <p><input type="submit" value="Validar"/></p>
 		</form>
  	</body>
