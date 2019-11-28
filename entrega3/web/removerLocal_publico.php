@@ -29,6 +29,8 @@
 		$result=$db->prepare($sql);
 
 		$result-> execute(array($nome));
+		$numRows = $result->rowcount();
+
 		
 		
 		$db->commit();
@@ -36,11 +38,12 @@
 		$db=null;
 	}
 	catch(PDOException $e){
-      $caught = true;
-      echo("<p> Local publico não removido :(</p>");
-			echo("<p>ERROR: {$e->getMessage()}</p>");
+      	$caught = true;
+    	echo("<p> Local publico não removido :(</p>");
+		echo("<p>ERROR: {$e->getMessage()}</p>");
   }
-  if (!$caught) echo("<p> Local publico removido com sucesso :)</p>");
+  if($numRows === 0) echo("O local que esta a tentar remover nao existe");
+  elseif (!$caught) echo("<p> Local publico removido com sucesso :)</p>");
 
 ?>
 
