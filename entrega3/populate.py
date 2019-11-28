@@ -15,14 +15,14 @@ for i in range(15):
 
 for i in range(30):
     j = random.randrange(0,15,1)
-    print("Insert Into item values (" + str(i) + ", 'descricao" + str(i) + "', 'localizacao" + str(i) + "', " + str(latitude[j]) + ", " + str(longitude[j]) +");\n")
+    print("Insert Into item (descricao, localizacao, latitude, longitude) values ( 'descricao" + str(i) + "', 'localizacao" + str(i) + "', " + str(latitude[j]) + ", " + str(longitude[j]) +");\n")
     itemCoordinates.append([latitude[j],longitude[j]])
 
 for i in range(30):
     tem_anomalia_redacao = random.choice([True, False])
-    print("Insert Into anomalia values (" + str(i) + ", 'zona_" + str(i) + "', 'imagem" + str(i) + "', 'lingua_" + str(i) + "', " + ts[random.randrange(0,36,1)] + ", 'descricao" + str(i) + "', " + str(tem_anomalia_redacao)  +");\n")
+    print("Insert Into anomalia (zona, imagem, lingua, ts, descricao, tem_anomalia_redacao) values ( 'zona_" + str(i) + "', 'imagem" + str(i) + "', 'lingua_" + str(i) + "', " + ts[random.randrange(0,36,1)] + ", 'descricao" + str(i) + "', " + str(tem_anomalia_redacao)  +");\n")
     if not (tem_anomalia_redacao):
-        print("Insert Into anomalia_traducao values (" + str(i) + ", 'zona2_" + str(i) + "', 'lingua2_" + str(i) + "');\n")
+        print("Insert Into anomalia_traducao (zona2, lingua2) values ( 'zona2_" + str(i) + "', 'lingua2_" + str(i) + "');\n")
 
 for i in range(30):
     for j in range(i+1, 30):

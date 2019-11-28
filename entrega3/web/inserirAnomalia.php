@@ -1,6 +1,5 @@
 <html>
 	<body style="font-family:Arial; font-size:20px;">
-	<h1>Local inserido com sucesso!</h1>
 	<form>
   <input type="button" value="Voltar" href="index.html" onclick="history.go(-2)">
 </form>
@@ -10,7 +9,6 @@
 
 <?php
 
-    $id = $_REQUEST['id'];
     $zona = $_REQUEST['zona'];
     $imagem = $_REQUEST['imagem'];
     $lingua = $_REQUEST['lingua'];
@@ -34,19 +32,23 @@
 
 
 
-		$sql= "INSERT INTO item (id, zona, imagem, lingua, ts, descrição, tem_anomalia_redação) VALUES (:id, :zona, :imagem, :lingua, :ts, :descrição, :tem_anomalia_redação);";
+		$sql= "INSERT INTO anomalia (zona, imagem, lingua, ts, descricao, tem_anomalia_redacao) VALUES (:zona, :imagem, :lingua, CURRENT_TIMESTAMP, :descricao, :tem_anomalia_redacao);";
 		$db->beginTransaction();
 
 		$result=$db->prepare($sql);
 
-		$result-> execute(array($id, $zona, $imagem, $lingua, $ts, $descrição, $tem_anomalia_redação));
+		$result-> execute(array($zona, $imagem, $lingua, $ts, $descrição, $tem_anomalia_redação));
 
 	 	$db->commit();
 		$db=null;
 	}
 	catch(PDOException $e){
+		$caught = true;
+		echo("<p> Anomalia nao inserida :( </p>");
 		echo("<p>ERROR: {$e->getMessage()}</p>");
 	}
+
+	if (!$caught) echo("<p> Anomalia inserida com sucesso :) </p>");
 
 ?>
 

@@ -2,8 +2,6 @@
     <body>
  		<h3>Inserir item:</h3>
 		<form action="inserirItem.php" method="post">
-        <p>id:</p>
-        <p><input type="visible" name="id" value="<?=$_REQUEST['id']?>"/></p>
         <p>descricao:</p>
         <p><input type="visible" name="descricao" value="<?=$_REQUEST['descricao']?>"/></p>
         <p>localizacao:</p>

@@ -10,7 +10,6 @@
 
 <?php
 
-    $id = $_REQUEST['id'];
     $descricao = $_REQUEST['descricao'];
     $localizacao = $_REQUEST['localizacao'];
     $latitude = $_REQUEST['latitude'];
@@ -30,19 +29,23 @@
 
 
 
-		$sql= "INSERT INTO item (id, descricao, localizacao, latitude, longitude) VALUES (:id, :descricao, :localizacao, :latitude, :longitude);";
+		$sql= "INSERT INTO item (descricao, localizacao, latitude, longitude) VALUES (:descricao, :localizacao, :latitude, :longitude);";
 		$db->beginTransaction();
 
 		$result=$db->prepare($sql);
 
-		$result-> execute(array($id, $descricao, $localizacao, $latitude, $longitude));
+		$result-> execute(array($descricao, $localizacao, $latitude, $longitude));
 
 	 	$db->commit();
 		$db=null;
 	}
 	catch(PDOException $e){
+		$caught = true;
+		echo("<p> Item nao inserido :( </p>");
 		echo("<p>ERROR: {$e->getMessage()}</p>");
 	}
+
+	if (!$caught) echo("<p> Item inserido com sucesso :) </p>");
 
 ?>
 
