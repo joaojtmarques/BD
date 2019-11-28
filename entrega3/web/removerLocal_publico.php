@@ -1,5 +1,8 @@
 <html>
 	<body style="font-family:Arial; font-size:20px;">
+	<form>
+		<input type="button" value="Voltar" href="index.html" onclick="history.go(-2)">
+	</form>
 <head>
 	<meta charset="UTF-8">
 </head>

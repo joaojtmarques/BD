@@ -8,9 +8,8 @@
 </head>
 
 <?php
-
 	
-	$id=$_REQUEST['id'];
+    $id=$_REQUEST['id'];
 
 	$caught = false;
 	try
