@@ -35,7 +35,7 @@
 
 
 		$sql= "INSERT INTO anomalia (zona, imagem, lingua, ts, descricao, tem_anomalia_redacao) VALUES (:zona, :imagem, :lingua, :ts, :descricao, :tem_anomalia_redacao);";
-		
+		echo($sql);
 		$db->beginTransaction();
 
 		$result=$db->prepare($sql);
