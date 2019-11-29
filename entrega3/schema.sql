@@ -59,7 +59,6 @@ create table duplicado (
     unique(item1,item2),
     check (item1 < item2)
     /*RI3*/
-    
 );
 
 create table utilizador (

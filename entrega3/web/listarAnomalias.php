@@ -68,7 +68,7 @@
         $result5-> execute(array($minLatitude, $maxLatitude, $minLongitude, $maxLongitude));
 
         echo("<table>\n");
-		echo("<tr><td >UTILIZADORES</td></tr>\n");
+		echo("<tr><td >IDs das Anomalias</td></tr>\n");
 		foreach($result5 as $row)
 		{
             echo("<tr><td>");
