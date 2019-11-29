@@ -1,13 +1,12 @@
 <html>
     <body>
- 		<h3>Editar Proposta de correcao</h3>
-		<form action="editarProposta_de_correcao.php" method="post">
-        <p>Numero da Proposta de correcao:
-        <input type="visible" name="nro" value="<?=$_REQUEST['nro']?>"/>
-		<p>Novo texto da Proposta de correcao:
-		<input type="visible" name="texto" value="<?=$_REQUEST['texto']?>"/></p>
-
-		<p><input type="submit" value="Validar"/></p>
+ 		<h3>Inserir Incidencias Duplicadas:</h3>
+		<form action="registarDuplicado.php" method="post">
+        <p>Id Item:</p>
+        <p><input type="visible" name="item1" value="<?=$_REQUEST['item1']?>"/></p>
+        <p>Id Item duplicado:</p>
+        <p><input type="visible" name="item2" value="<?=$_REQUEST['item2']?>"/></p>
+        <p><input type="submit" value="Validar"/></p>
 		</form>
  	</body>
 </html>

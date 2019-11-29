@@ -28,24 +28,24 @@
 
 
 
-		$sql= "INSERT INTO incidencia(anomalia_id, item_id, email) VALUES (:, :data_hora, :texto);";
+		$sql= "INSERT INTO incidencia(anomalia_id, item_id, email) VALUES (:anomalia, :item, :email);";
 
 		$db->beginTransaction();
 
 		$result=$db->prepare($sql);
 
-		$result-> execute(array($email, $data_hora, $texto));
+		$result-> execute(array($anomalia, $item, $email));
 
 	 	$db->commit();
 		$db=null;
 	}
 	catch(PDOException $e){
 		$caught = true;
-		echo("<p> Proposta nao inserida :( </p>");
+		echo("<p> Incedencia nao registada :( </p>");
 		echo("<p>ERROR: {$e->getMessage()}</p>");
 	}
 
-	if (!$caught) echo("<p> Proposta inserida com sucesso :) </p>");
+	if (!$caught) echo("<p> Incidencia registada com sucesso :) </p>");
 
 ?>
 

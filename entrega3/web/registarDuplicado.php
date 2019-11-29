@@ -9,10 +9,8 @@
 
 <?php
 
-    $email = $_REQUEST['email'];
-		$data_hora = $_REQUEST['data_hora'];
-		$texto = $_REQUEST['texto'];
-		$anomalia = $_REQUEST['anomalia'];
+    $item1 = $_REQUEST['item1'];
+		$item2 = $_REQUEST['item2'];
 
 		$caught = false;
 
@@ -23,32 +21,30 @@
 		$user="ist189473";
 		$password= "bd2019";
 		$dbname=$user;
-
+		
 		$db= new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 
-		$sql= "INSERT INTO proposta_de_correcao(email, data_hora, texto) VALUES (:email, :data_hora, :texto);";
-		$sql2= "INSERT INTO correcao(email, anomalia_id) VALUES (:email, :anomalia);";
+		$sql= "INSERT INTO duplicado(item1, item2) VALUES (:item1, :item2);";
+
 		$db->beginTransaction();
 
 		$result=$db->prepare($sql);
-		$result2=$db->prepare($sql2);
 
-		$result-> execute(array($email, $data_hora, $texto));
-		$result2-> execute(array($email, $anomalia));
+		$result-> execute(array($item1, $item2));
 
 	 	$db->commit();
 		$db=null;
 	}
 	catch(PDOException $e){
 		$caught = true;
-		echo("<p> Proposta nao inserida :( </p>");
+		echo("<p> Duplicado nao registado :( </p>");
 		echo("<p>ERROR: {$e->getMessage()}</p>");
 	}
 
-	if (!$caught) echo("<p> Proposta inserida com sucesso :) </p>");
+	if (!$caught) echo("<p> Duplicado registado com sucesso :) </p>");
 
 ?>
 

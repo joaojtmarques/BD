@@ -1,13 +1,14 @@
 <html>
     <body>
- 		<h3>Editar Proposta de correcao</h3>
-		<form action="editarProposta_de_correcao.php" method="post">
-        <p>Numero da Proposta de correcao:
-        <input type="visible" name="nro" value="<?=$_REQUEST['nro']?>"/>
-		<p>Novo texto da Proposta de correcao:
-		<input type="visible" name="texto" value="<?=$_REQUEST['texto']?>"/></p>
-
-		<p><input type="submit" value="Validar"/></p>
+ 		<h3>Inserir Incidencia:</h3>
+		<form action="registarIncidencia.php" method="post">
+        <p>Id anomalia:</p>
+        <p><input type="visible" name="anomalia" value="<?=$_REQUEST['anomalia']?>"/></p>
+        <p>Id Item:</p>
+        <p><input type="visible" name="item" value="<?=$_REQUEST['item']?>"/></p>
+        <p>email:</p>
+        <p><input type="visible" name="email" value="<?=$_REQUEST['email']?>"/></p>
+        <p><input type="submit" value="Validar"/></p>
 		</form>
  	</body>
 </html>
