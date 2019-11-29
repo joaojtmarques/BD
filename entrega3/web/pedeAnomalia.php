@@ -2,6 +2,8 @@
     <body>
  		<h3>Inserir anomalia:</h3>
 		<form action="inserirAnomalia.php" method="post">
+        <p>id:</p>
+        <p><input type="visible" name="id" value="<?=$_REQUEST['id']?>"/></p>
         <p>zona:</p>
         <p><input type="visible" name="zona" value="<?=$_REQUEST['zona']?>"/></p>
         <p>imagem:</p>

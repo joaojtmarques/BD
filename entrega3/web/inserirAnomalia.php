@@ -9,12 +9,14 @@
 
 <?php
 
+	$id = $_REQUEST['id'];
     $zona = $_REQUEST['zona'];
     $imagem = $_REQUEST['imagem'];
 	$lingua = $_REQUEST['lingua'];
 	$ts = $_REQUEST['ts'];
     $descricao = $_REQUEST['descricao'];
 	$tem_anomalia_redacao = $_REQUEST['tem_anomalia_redacao'];
+	$id_trad = $id;
 	$zona2 = $_REQUEST['zona2'];
 	$lingua2 = $_REQUEST['lingua2'];
 
@@ -34,18 +36,17 @@
 
 
 
-		$sql= "INSERT INTO anomalia (zona, imagem, lingua, ts, descricao, tem_anomalia_redacao) VALUES (:zona, :imagem, :lingua, :ts, :descricao, :tem_anomalia_redacao);";
-		echo($sql);
+		$sql= "INSERT INTO anomalia VALUES (:id, :zona, :imagem, :lingua, :ts, :descricao, :tem_anomalia_redacao);";
 		$db->beginTransaction();
 
 		$result=$db->prepare($sql);
 
-		$result-> execute(array($zona, $imagem, $lingua, $ts, $descricao, $tem_anomalia_redacao));
+		$result-> execute(array($id, $zona, $imagem, $lingua, $ts, $descricao, $tem_anomalia_redacao));
 
 		if( strtolower($tem_anomalia_redacao) == "false") {
-			$sql2= "INSERT INTO anomalia_traducao (zona2, lingua2) VALUES (:zona2, :lingua2);";
+			$sql2= "INSERT INTO anomalia_traducao VALUES (:id_trad, :zona2, :lingua2);";
 			$result2=$db->prepare($sql2);
-			$result2-> execute(array($zona2, $lingua2));
+			$result2-> execute(array($id_trad, $zona2, $lingua2));
 		}
 
 		$db->commit();
