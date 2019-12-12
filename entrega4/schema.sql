@@ -58,6 +58,25 @@ create table anomalia_traducao (
 
 
 
+CREATE OR REPLACE FUNCTION check_zona_func() RETURNS trigger AS $check_zona$
+    BEGIN      
+
+        IF EXISTS(select zona from anomalia where zona = new.zona2)
+        THEN
+            RAISE EXCEPTION 'Zona da anomalia de traducao não se pode sobrepor a zona da anomalia';
+        END IF;
+
+        RETURN NEW;
+    END;
+$check_zona$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_zona BEFORE INSERT
+    ON anomalia_traducao
+    FOR EACH ROW
+    EXECUTE PROCEDURE check_zona_func();
+
+
+
 create table duplicado (
     item1 serial not null,
     item2 serial not null,
@@ -119,6 +138,25 @@ $$
 language plpgsql;
 
 create trigger checkMailRegular before insert on utilizador_qualificado for each row execute procedure triggerEmailExistsUtilizadorRegular();
+
+create or replace function check_email_utilizador() returns trigger as $$
+BEGIN
+if exists (
+    select email from utilizador_qualificado union select email from utilizador_regular where not email = new.email
+)
+then 
+    raise exception 'O email de utilizador nao figura em utilizador_qualificado nem em utilizador_regular';
+end if;
+    return new;
+end;
+$$
+language plpgsql;
+
+create CONSTRAINT trigger email_utilizador after insert or update on utilizador 
+DEFERRABLE INITIALLY DEFERRED 
+FOR EACH ROW EXECUTE PROCEDURE check_email_utilizador();
+
+
 
 
 create table incidencia (
